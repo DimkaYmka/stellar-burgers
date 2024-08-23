@@ -18,7 +18,6 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
   const orderInfo = useMemo(() => {
     if (!ingredients.length) return null;
 
-    // Получаем список ингредиентов для текущего заказа
     const ingredientsInfo = order.ingredients.reduce<TIngredient[]>(
       (acc, itemId) => {
         const ingredient = ingredients.find((ing) => ing._id === itemId);
@@ -28,19 +27,17 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
       []
     );
 
-    // Рассчитываем общую стоимость
     const total = ingredientsInfo.reduce((acc, item) => acc + item.price, 0);
 
-    // Определяем, сколько ингредиентов показать и сколько осталось
     const ingredientsToShow = ingredientsInfo.slice(0, maxIngredients);
     const remainingCount = ingredientsInfo.length - ingredientsToShow.length;
 
     return {
-      ingredientsInfo, // добавлено
+      ingredientsInfo,
       ingredientsToShow,
       remains: remainingCount,
       total,
-      date: new Date(order.createdAt), // преобразование строки в дату
+      date: new Date(order.createdAt),
       _id: order._id,
       status: order.status,
       name: order.name,

@@ -21,7 +21,7 @@ export const FeedInfo: FC = () => {
     <FeedInfoUI
       readyOrders={readyOrders}
       pendingOrders={pendingOrders}
-      feed={todayOrders} // исправление, чтобы передать значение типа number
+      feed={todayOrders}
     />
   );
 };
