@@ -1,14 +1,23 @@
-import { FC } from 'react';
-import { Preloader } from '../ui/preloader';
+import React, { FC, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from '../../services/store';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
+import { TIngredient } from '@utils-types';
+import { selectIngredients } from '../../services/slices/ingredients';
+import { RootState } from '../../services/store';
 
 export const IngredientDetails: FC = () => {
-  /** TODO: взять переменную из стора */
-  const ingredientData = null;
+  const { id } = useParams<{ id: string }>();
+  const ingredients = useSelector((state: RootState) =>
+    selectIngredients(state)
+  );
 
-  if (!ingredientData) {
-    return <Preloader />;
-  }
+  const ingredient = useMemo(
+    () => ingredients.find((ing) => ing._id === id),
+    [ingredients, id]
+  );
 
-  return <IngredientDetailsUI ingredientData={ingredientData} />;
+  if (!ingredient) return null;
+
+  return <IngredientDetailsUI ingredientData={ingredient} />;
 };
