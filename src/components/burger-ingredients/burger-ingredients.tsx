@@ -19,12 +19,10 @@ export const BurgerIngredients: FC = () => {
 
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
 
-  // Используйте useInView для отслеживания видимости
   const { ref: bunsRef, inView: inViewBuns } = useInView({ threshold: 0 });
   const { ref: mainsRef, inView: inViewMains } = useInView({ threshold: 0 });
   const { ref: saucesRef, inView: inViewSauces } = useInView({ threshold: 0 });
 
-  // Рефы для заголовков
   const titleBunRef = useRef<HTMLHeadingElement>(null);
   const titleMainRef = useRef<HTMLHeadingElement>(null);
   const titleSaucesRef = useRef<HTMLHeadingElement>(null);
