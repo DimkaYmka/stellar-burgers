@@ -23,9 +23,7 @@ export const burgerConstructorSlice = createSlice({
     appendIngredient: {
       reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
         if (action.payload.type === 'bun') {
-          if (state.bun === null) {
-            state.bun = action.payload;
-          }
+          state.bun = action.payload;
         } else {
           state.ingredients = [...state.ingredients, action.payload];
         }

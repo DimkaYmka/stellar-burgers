@@ -14,11 +14,13 @@ export const Profile: FC = () => {
   });
 
   useEffect(() => {
-    setFormValue((prevState) => ({
-      ...prevState,
-      name: user?.name || '',
-      email: user?.email || ''
-    }));
+    if (user) {
+      setFormValue({
+        name: user.name,
+        email: user.email,
+        password: ''
+      });
+    }
   }, [user]);
 
   const isFormChanged =
@@ -29,11 +31,6 @@ export const Profile: FC = () => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     dispatch(update(formValue));
-    setFormValue({
-      name: user?.name || '',
-      email: user?.email || '',
-      password: ''
-    });
   };
 
   const handleCancel = (e: SyntheticEvent) => {
@@ -54,29 +51,12 @@ export const Profile: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type='text'
-        name='name'
-        value={formValue.name}
-        onChange={handleInputChange}
-      />
-      <input
-        type='email'
-        name='email'
-        value={formValue.email}
-        onChange={handleInputChange}
-      />
-      <input
-        type='password'
-        name='password'
-        value={formValue.password}
-        onChange={handleInputChange}
-      />
-      <button type='submit' disabled={!isFormChanged}>
-        Сохранить
-      </button>
-      <button onClick={handleCancel}>Отменить</button>
-    </form>
+    <ProfileUI
+      formValue={formValue}
+      isFormChanged={isFormChanged}
+      handleSubmit={handleSubmit}
+      handleCancel={handleCancel}
+      handleInputChange={handleInputChange}
+    />
   );
 };

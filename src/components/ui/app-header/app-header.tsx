@@ -4,8 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { TAppHeaderUIProps } from './type';
 import {
   BurgerIcon,
-  ProfileIcon,
-  ListIcon
+  ListIcon,
+  Logo,
+  ProfileIcon
 } from '@zlden/react-developer-burger-ui-components';
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
@@ -39,7 +40,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
           </>
         </div>
         <div className={styles.logo}>
-          <Link to='/'> {/* <Logo className='' /> */}</Link>
+          <Logo className='' />
         </div>
         <div className={styles.link_position_last}>
           <ProfileIcon type={'primary'} />
