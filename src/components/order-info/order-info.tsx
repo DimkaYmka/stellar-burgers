@@ -4,10 +4,7 @@ import { OrderInfoUI } from '../ui/order-info';
 import { useParams } from 'react-router-dom';
 import { TIngredient } from '@utils-types';
 import { getOrder, getOrderData } from '../../services/slices/order';
-import {
-  selectIngredients,
-  loadIngredients
-} from '../../services/slices/ingredients';
+import { selectIngredients } from '../../services/slices/ingredients';
 import { useSelector, useDispatch } from '../../services/store';
 import { RootState } from '../../services/store';
 
@@ -23,13 +20,10 @@ export const OrderInfo: FC = () => {
     if (orderIdx) {
       dispatch(getOrderData(parseInt(orderIdx, 10)));
     }
-    if (ingredients.length === 0) {
-      dispatch(loadIngredients());
-    }
-  }, [dispatch, orderIdx, ingredients.length]);
+  }, [dispatch, orderIdx]);
 
   const orderInfo = useMemo(() => {
-    if (!order || !ingredients.length) return null;
+    if (!order || ingredients.length === 0) return null;
 
     const date = new Date(order.createdAt);
 

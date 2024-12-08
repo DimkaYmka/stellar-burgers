@@ -2,23 +2,15 @@ import styles from './constructor-page.module.css';
 import { BurgerIngredients } from '../../components';
 import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
-import { FC, useEffect } from 'react';
-import { useSelector, useDispatch } from '../../services/store';
-import {
-  selectIngredientsLoading,
-  loadIngredients
-} from '../../services/slices/ingredients';
+import { FC } from 'react';
+import { useSelector } from '../../services/store';
+import { selectIngredientsLoading } from '../../services/slices/ingredients';
 import { RootState } from '../../services/store';
 
 export const ConstructorPage: FC = () => {
-  const dispatch = useDispatch();
   const isIngredientsLoading = useSelector((state: RootState) =>
     selectIngredientsLoading(state)
   );
-
-  useEffect(() => {
-    dispatch(loadIngredients());
-  }, [dispatch]);
 
   return (
     <>
